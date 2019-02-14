@@ -4,9 +4,9 @@ environments:
     environment_variables:
       STAGING_API: https://api.suse.de
 pipelines:
-  "SLE15.SP1.Staging.B":
+  "SLE15.SP1.Staging.E":
     environment_variables:
-      STAGING_PROJECT: SUSE:SLE-15-SP1:GA:Staging:B
+      STAGING_PROJECT: SUSE:SLE-15-SP1:GA:Staging:E
     group: SLE15.SP1.Stagings
     materials:
       scripts:
