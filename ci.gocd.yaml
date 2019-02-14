@@ -1,12 +1,9 @@
 format_version: 3
-environments:
-  suse:
-    environment_variables:
-      STAGING_API: https://api.suse.de
 pipelines:
   "SLE15.SP1.Staging.E":
     environment_variables:
       STAGING_PROJECT: SUSE:SLE-15-SP1:GA:Staging:E
+      STAGING_API: https://api.suse.de
     group: SLE15.SP1.Stagings
     materials:
       scripts:
