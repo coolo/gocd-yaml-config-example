@@ -1,61 +1,38 @@
+---
 environments:
-  example:
+  suse:
     environment_variables:
-      EXAMPLE_DEPLOYMENT: testing
-    pipelines:
-      - yaml-example
+      STAGING_API: https://api.suse.de
 pipelines:
-  yamlpipe1:
-    group: simple
+  environment_variables:
+    STAGING_PROJECT: SUSE:SLE-15-SP1:GA:Staging:B
+  "SLE15.SP1.Staging.B":
+    group: SLE15.SP1.Stagings
     materials:
-      mygit:  # this is the name of material
-        # says about type of material and url at once
-        git: http://my.example.org/mygit.git
+      citest:
+        git: https://github.com/coolo/citest.git
     stages:
-      - build: # name of stage
-          jobs:
-            build: # name of the job
-              tasks:
-               - exec: # indicates type of task
-                   command: make
-  "yaml-example": # definition of yaml-example pipeline
-    group: yaml-example
-    label_template: "${mygit[:8]}"
-    locking: off
-    materials:
-      mygit: # this is the name of material
-        # keyword git says about type of material and url at once
-        git: http://my.example.org/mygit.git
-        branch: ci
-      upstream:
-        # type is optional here, material type is implied based on presence of pipeline and stage fields
-        # type: dependency
-        pipeline: yamlpipe1
-        stage: build
-    stages: # list of stages in order
-      - build: # name of stage
-          clean_workspace: true
-          jobs:
-            csharp: # name of the job
-              resources:
-               - net45
-              artifacts:
-               - build:
-                   source: bin/
-                   destination: build
-               - test:
-                   source: tests/
-                   destination: test-reports/
-              tabs:
-                report: test-reports/index.html
-              tasks: # ordered list of tasks to execute in job csharp
-               - fetch:
-                   pipeline: yamlpipe1
-                   stage: build
-                   job: build
-                   source: test-bin/
-                   destination: bin/
-               - exec: # indicates type of task
-                   command: make
-                   arguments:
-                    - "VERBOSE=true"
+      - "Generate.Release.Package":
+        approval: manual
+        jobs:
+          "Run.Pkglistgen":
+            elastic_profile_id: "repo-checker"
+            tasks:
+              - exec:
+                command: ./generate-release-pkg.sh
+
+      - "Check.Build.Succeeds":
+        jobs:
+          "Wait.For.Build":
+            elastic_profile_id: "check-build"
+            tasks:
+              - exec:
+                command: ./check-build.sh
+
+      - "Update.000product":
+        jobs:
+          "Run.Pkglistgen":
+            elastic_profile_id: "check-build"
+            tasks:
+              - exec:
+                command: ./update-000product.sh
