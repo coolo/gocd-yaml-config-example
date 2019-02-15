@@ -1,5 +1,5 @@
 echo 'format_version: 3' > ci.gocd.yaml
-echo 'pipeliines:' >> ci.gocd.yaml
+echo 'pipelines:' >> ci.gocd.yaml
 for staging in A B C D E F G H S V Y; do
 
 cat >> ci.gocd.yaml <<EOF

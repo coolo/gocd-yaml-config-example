@@ -1,5 +1,5 @@
 format_version: 3
-pipeliines:
+pipelines:
   "SLE15.SP1.Staging.A":
     environment_variables:
       STAGING_PROJECT: SUSE:SLE-15-SP1:GA:Staging:A
