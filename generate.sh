@@ -26,7 +26,7 @@ cat >> ci.gocd.yaml <<EOF
             "Wait.For.Build":
               tasks:
                 - exec:
-                  command: ./check-build.sh
+                    command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
