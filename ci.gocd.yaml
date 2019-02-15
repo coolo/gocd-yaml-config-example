@@ -1,5 +1,5 @@
 format_version: 3
-pipelines:
+pipeliines:
   "SLE15.SP1.Staging.A":
     environment_variables:
       STAGING_PROJECT: SUSE:SLE-15-SP1:GA:Staging:A
@@ -13,6 +13,8 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
@@ -20,10 +22,13 @@ pipelines:
           jobs:
             "Wait.For.Build":
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
@@ -40,20 +45,22 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
@@ -70,20 +77,22 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
@@ -100,24 +109,25 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
-
   "SLE15.SP1.Staging.E":
     environment_variables:
       STAGING_PROJECT: SUSE:SLE-15-SP1:GA:Staging:E
@@ -131,20 +141,22 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
@@ -161,20 +173,22 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
@@ -191,20 +205,22 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
@@ -221,20 +237,22 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
@@ -251,24 +269,25 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
-
   "SLE15.SP1.Staging.V":
     environment_variables:
       STAGING_PROJECT: SUSE:SLE-15-SP1:GA:Staging:V
@@ -282,20 +301,22 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
@@ -312,20 +333,22 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
-                - script: ./check-build.sh
+                - exec:
+                  command: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
+              resources:
+                - repo-checker
               tasks:
                 - exec:
                     command: ./update-000product.sh
