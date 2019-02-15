@@ -13,20 +13,17 @@ pipelines:
           approval: manual
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "repo-checker"
               tasks:
                 - exec:
                     command: ./generate-release-pkg.sh
       - "Check.Build.Succeeds":
           jobs:
             "Wait.For.Build":
-              elastic_profile_id: "check-build"
               tasks:
                 - script: ./check-build.sh
       - "Update.000product":
           jobs:
             "Run.Pkglistgen":
-              elastic_profile_id: "check-build"
               tasks:
                 - exec:
                     command: ./update-000product.sh
